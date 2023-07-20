@@ -26,5 +26,10 @@ Récupérer la liste des titres de l'album "Let There Be Rock" ?
 Afficher le prix de cet album ainsi que sa durée totale ?
   SELECT SUM(b.Milliseconds) AS durée_album_en_ms, SUM(c.unitprice) AS prix_album FROM albums a, tracks b, invoice_items c WHERE a.AlbumId = b.albumid AND b.TrackId = c.TrackId AND a.title = 'Let There Be Rock'
 
-Afficher le coût de l'intégralité de la discographie de "Deep Purple"
-Créer l'album de ton artiste favori en base, en renseignant correctement les trois tables albums, artists et tracks
+Afficher le coût de l'intégralité de la discographie de "Deep Purple" ?
+  SELECT round(SUM(b.unitprice),2) FROM artists a, tracks b, albums c WHERE a.artistid = c.artistid AND c.albumid = b.albumid AND a.name = 'Deep Purple'
+
+Créer l'album de ton artiste favori en base, en renseignant correctement les trois tables albums, artists et tracks :
+  INSERT INTO albums (albumid, title, artistid) VALUES (348, 'La Danse du Siècle', 276);
+  INSERT INTO artists (artistid, name) VALUES (276, 'Super Nova');
+  INSERT INTO tracks (trackid, name, albumid, mediatypeid, genreid, composer, milliseconds, bytes, unitprice) VALUES (1001, 'La Queuleleu', 348, 1, 7, 'Choucroute', 288731, 9416186, 0.99);
